@@ -1,9 +1,17 @@
 class Boggle {
   constructor(file) {
     this.kamus = file;
-    this.papan = [];
+    // this.papan = [];
     this.hasil = [];
     this.hint =  true;
+    this.start = 0;
+    this.findWords = [];
+
+    this.papan = [ [ 'R', 'X', 'C', 'V' ],
+                  [ 'F', 'O', 'G', 'G' ],
+                  [ 'M', 'M', 'J', 'U' ],
+                  [ 'I', 'O', 'V', 'A' ] ]
+
   }
   randomAphabet(){
     let huruf = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -20,19 +28,63 @@ class Boggle {
     return this.papan;
   }
   solver(){
-    let listAround = [];
-    let start = 0;
+    let listAround=[];
+    console.log(this.papan);
     this.kamus.forEach(dataKamus =>{
       for (var x = 0; x < this.papan.length; x++) {
         let dataPapan = this.papan[x]
         for (var y = 0; y < dataPapan.length; y++) {
-          if(dataPapan[y].indexOf(dataKamus[start]) !== -1){
+          let listArray = dataPapan[y]
+          // console.log('-------',listArray);
+          let insearch = dataKamus[this.start]
+          // console.log(this.checkValue(listArray, insearch));
+          while(this.checkValue(listArray, insearch)){
+            console.log(x+' '+y);
             listAround.push(this.chekAround(x,y))
+            this.findWords.push(insearch)
+            this.start++
+            listAround.forEach(list=>{
+              listArray = list
+            })
+            insearch = dataKamus[this.start]
+            console.log('data baru', listArray)
+            console.log('next search ',insearch);
+            // console.log('------',this.checkValue(listAround, insearch))
+
           }
         }
       }
     })
-    return coba
+    return listAround
+    // let listAround = [];
+    // this.kamus.forEach(dataKamus =>{
+    //   for (var x = 0; x < this.papan.length; x++) {
+    //     let dataPapan = this.papan[x]
+    //     for (var y = 0; y < dataPapan.length; y++) {
+    //       let listArray = dataPapan[y]
+    //       let insearch = dataKamus[this.start]
+    //       // console.log(this.checkValue(listArray, insearch));
+    //       while(this.checkValue(listArray, insearch)){
+    //         listAround.push(this.chekAround(x,y))
+    //         this.findWords.push(insearch)
+    //         listArray = listAround
+    //         console.log('cekValue',this.start);
+    //         console.log('next search ',insearch);
+    //         console.log('next Array ', listAround);
+    //         // this.checkValue(listAround, insearch)
+    //       }
+    //     }
+    //   }
+    // })
+    // return listAround
+  }
+  checkValue(listArray, search){
+    // console.log('datas',listArray);
+    if(listArray.indexOf(search) !== -1){
+      return true
+    } else {
+       return false
+    }
   }
   chekAround(posX, posY){
     // console.log('key'+this.papan[posX][posX]);
@@ -53,7 +105,9 @@ class Boggle {
 }
 var arr = require('./coba.js');
 let boggle = new Boggle(arr)
-console.log(boggle.shake(4));
+// console.log(boggle.shake(4));
 // console.log(boggle.papan);
 console.log(boggle.solver());
+// console.log(boggle.checkValue());
+console.log('finded '+boggle.findWords);
 // console.log(boggle.chekAround(0,0));
