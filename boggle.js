@@ -308,7 +308,7 @@ class Boggle{
             }
        }
        console.log("Found word = "+this.foundWord.length)
-       console.log(this.foundWord)
+       console.log(this.foundWord.join(" "))
     }
 }
 var game = new Boggle()
