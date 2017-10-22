@@ -61,6 +61,48 @@ class Boggle {
 		}
 	}
 
+	bruteSolve(board = this.board) {
+		let kamus = this.data;
+		let found = [];
+		let search = '';
+		let strBoard = this.boardToString(board);
+
+		for (var x = 0; x < kamus.length; x++) {
+			let wordSearch = kamus[x];
+			let counter = 0;
+			let wsArr = wordSearch.split('');
+
+			for (var i = 0; i < strBoard.length; i++) {
+				for (var j = 0; j < wordSearch.length; j++) {
+
+
+					if (wordSearch[j] == strBoard[i]) {
+						if (wsArr.indexOf(strBoard[i]) != -1) {
+							wsArr.splice(wsArr.indexOf(strBoard[i]), 1);
+						}
+					}
+				}	
+			}
+
+		//dt, du, dr, dn
+		if (wsArr.length === 0) {
+			found.push(wordSearch);
+		} else {
+			found.push('');
+		}
+	}	
+
+	console.log('solve()');
+	console.log(`${found.length} words found :`);
+
+	for (var xw = 0; xw < found.length; xw++) {
+		if (found[xw] !== '') {
+			console.log(found[xw]);
+		}	
+	}
+	// return found;
+}
+
 	createBoggleDictionary() {
 		let arr = this.data;
 		let arrKamus = [];
@@ -81,12 +123,25 @@ class Boggle {
 		max = Math.floor(max);
 	  	return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 	}
+
+	boardToString (board = this.board) {
+		let res = [];
+
+		for (var i = 0; i < 4; i++) {
+			for (var j = 0; j < 4; j++) {
+				res.push(board[i][j]);
+			}
+		}
+
+		return res;
+	}
 }
 
 
 let boggle = new Boggle();
 let board = boggle.shake(4);
-boggle.solve();
+console.log(board);
+// boggle.solve();
+boggle.bruteSolve();
 
-// console.log(boggle.isOnDictionary('VLA'));
 
