@@ -1,5 +1,6 @@
 class Boggle{
   constructor(words){
+    this.kamus=require('./data')
     this.letter='abcdefghijklmnopqrstuvwxyz';
     this.words=words;
     this.board=[];
@@ -23,4 +24,5 @@ class Boggle{
 }
 
 var game = new Boggle ();
+console.log(game)
 console.log(game.shake(4))
