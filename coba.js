@@ -1,4 +1,4 @@
-var words = ["AJO","OJ"];
+var words = ["GI"];
 // ,"ABAD","ABADI","ABAH","ABAI"
 
 // exports.words = words;
