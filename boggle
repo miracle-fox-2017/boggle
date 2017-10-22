@@ -1,0 +1,8 @@
+class Boggle {
+    constructor(kamus) {
+        this.abjad = 'DGHIKLPSYEUTEORN';
+        this.papan = [];
+        this.kamus = ['APPLE', 'TURN', 'PUT', 'SIT', 'TRIP']
+        //this.kamus = kamus
+        this.arrHasil = [];
+    }
