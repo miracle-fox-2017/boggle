@@ -8,9 +8,9 @@ class Boggle {
     this.findWords = [];
 
     // this.papan = [[ 'R', 'X', 'C', 'V' ],
-                  // [ 'F', 'O', 'G', 'G' ],
-                  // [ 'M', 'M', 'J', 'U' ],
-                  // [ 'I', 'O', 'V', 'A' ] ]
+    //               [ 'F', 'O', 'G', 'G' ],
+    //               [ 'M', 'M', 'J', 'U' ],
+    //               [ 'I', 'O', 'V', 'A' ] ]
 
   }
   randomAphabet(){
@@ -36,6 +36,7 @@ class Boggle {
         for (var y = 0; y < dataPapan.length; y++) {
           let listArray = dataPapan[y]
           let insearch = dataKamus[this.start]
+          // console.log('Nilai AWAL', insearch);
           debugger
           if(this.checkValue(listArray, insearch)){
             // if(this.hint){
@@ -62,7 +63,7 @@ class Boggle {
         }
       }
     })
-    return this.findWords.join()
+    return this.findWords
   }
   checkValue(listArray, search){
     // console.log('datas',listArray, search);
@@ -94,8 +95,7 @@ let boggle = new Boggle(arr)
 console.log(boggle.shake(4));
 // console.log(boggle.papan);
 console.log(boggle.solver());
-// console.log(boggle.solver());
-// console.log(boggle.solver());
+
 // console.log(boggle.checkValue());
 // console.log('finded '+boggle.findWords);
 // console.log(boggle.chekAround(0,0));
