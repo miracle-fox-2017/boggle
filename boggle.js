@@ -20,19 +20,6 @@ class Boggle {
 		return arrBoard;
 	}
 
-	solve(board = this.board){
-		let boggleDictionary = this.createBoggleDictionary();
-		let boardJoin = [];
-		let wordFound = [];
-		
-		console.log('solve()');
-		console.log(`${wordFound.length} words found :`);
-
-		for (var xw = 0; xw < wordFound.length; xw++) {
-			console.log(wordFound[xw]);
-		}
-	}
-
 	isOnDictionary(word = '', dictionary = this.data) {
 		return dictionary.indexOf(word) <= 0 ? true : false ;
 	}
