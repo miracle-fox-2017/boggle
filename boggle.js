@@ -1,22 +1,18 @@
 class Boggle {
-  constructor(word, boardScale){
+  constructor(word){
     this.word = word
-    this.scale = boardScale
     this.boardSave = []
     this.boardGame = []
-    this.solved = []
-    this.wordLength = 0
-    this.iChar = 0
     this.temp = []
     this.result = []
-    this.saveIndex1=[]
+    this.saveIndex1 = []
   }
 
-  shake(){
-    let abj = 'AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSSTTTTUUUUVVVVWWWWXXXXYYYYZZZZ'
-    for (var i = 0; i < this.scale; i++) {
+  shake(boardScale){ // board random
+    let abj = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    for (var i = 0; i < boardScale; i++) {
       let row = []
-      for (var j = 0; j < this.scale; j++) {
+      for (var j = 0; j < boardScale; j++) {
         let random = Math.floor(Math.random(0)*abj.length)
         row.push(abj[random])
       }
@@ -26,7 +22,7 @@ class Boggle {
     return this.boardGame
   }
 
-  boardTes(){
+  boardTes(){ // board buat tes
     this.boardSave = [['D', 'B', 'O', 'U'],
                       ['O', 'W', 'J', 'G'],
                       ['I', 'E', 'N', 'G'],
@@ -35,44 +31,41 @@ class Boggle {
                       ['O', 'W', 'J', 'G'],
                       ['I', 'E', 'N', 'G'],
                       ['M', 'I', 'A', 'N']]
+    return this.boardGame
   }
 
   solve(){
     for (var k = 0; k < this.word.length; k++) {
       if(this.boardSave != this.boardGame){
-        this.resetBoard()
+        this.resetBoard() // reset board sebelum cek kata selanjutnya
       }
       this.saveIndex1=[]
-      this.checkWord(this.word[k].split(''))
+      this.checkWord(this.word[k].split('')) // memanggil method cek kata
       this.temp=[]
     }
-    return this.result
+    return `${this.result.length} words found:\n${this.result.join('\n')}`
   }
 
   checkWord(str, count=0, row=0, col=0){
     debugger
-    // console.log(str);
     for (var i = row; i < this.boardGame.length; i++) {
       for (var j = col; j < this.boardGame[i].length; j++) {
-        if(this.boardGame[i][j] == str[count]){
+        if(this.boardGame[i][j] == str[count]){ // menyimpan index dan huruf pertama dari kata yg di cek
           if(this.temp.length == 0){
             this.saveIndex1.push(i)
             this.saveIndex1.push(j)
             this.saveIndex1.push(this.boardGame[i][j])
           }
-          this.temp.push(this.boardGame[i][j])
-          // console.log(saveIndex1);
+          this.temp.push(this.boardGame[i][j]) // huruf yg cocok simpan di temp
           this.boardGame[i][j]=0
           if(count == str.length-1){
-            // console.log(this.temp.join(''));
-            // console.log(str.join(''));
-            if(this.temp.join('') == str.join('')){
+            if(this.temp.join('') == str.join('')){ // jika isi temp sama dengan kata simpan di result
 
               this.result.push(this.temp.join(''));
             }
             break
           }
-          this.checkAll(i,j,str[count+1],count,str)
+          this.checkAll(i,j,str[count+1],count,str) // memanggil method cek di 360 derajat
           this.temp = []
           return this.checkWord(str, 0) + this.replace()
         }
@@ -80,7 +73,7 @@ class Boggle {
     }
   }
 
-  replace(){
+  replace(){ // replace huruf yg sudah ditandai menjadi belum ditandai
     let row = this.saveIndex1[0],
         col = this.saveIndex1[1],
         str = this.saveIndex1[2];
@@ -208,13 +201,13 @@ class Boggle {
 
 let testCase = require('./data.js');
 
-let wordTes = ['DOWN', 'BOJU', 'GET', 'JOB', 'MENANG']; // word buat tes
+let wordTes = ['DOWN', 'BOJU', 'MENGGU', 'JOB', 'MENANG', 'WENANG']; // word buat tes
 
-// let game = new Boggle(wordTes, 10); // word manual
-let game = new Boggle(testCase, 10); // word dari file
+// let game = new Boggle(wordTes); // word manual
+let game = new Boggle(testCase); // word dari file
 
 console.log('Board Boggle');
-// console.log(game.boardTes()); // ---> Board manual
-console.log(game.shake()); // ---> Board random
+console.log(game.boardTes()); // ---> Board manual
+// console.log(game.shake(4)); // ---> Board random (ukuran bisa ditentukan)
 console.log('Word');
 console.log(game.solve());
