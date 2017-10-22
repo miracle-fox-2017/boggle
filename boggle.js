@@ -51,18 +51,20 @@ class Boggle {
                   listArray = list
                 })
 
-              //
+              // console.log('---',hh);
+
               // } else {
               //
               // }
-              console.log('data baru', listArray)
-              console.log('next search ',insearch);
+              // console.log('data baru', listArray)
+              // console.log('next search ',insearch);
             // }
             }
           }
         }
       }
     })
+
     return this.findWords
   }
   checkValue(listArray, search){
@@ -91,6 +93,7 @@ class Boggle {
   }
 }
 var arr = require('./coba.js');
+// var arr = require('./data.js');
 let boggle = new Boggle(arr)
 console.log(boggle.shake(4));
 // console.log(boggle.papan);
