@@ -3,6 +3,7 @@ class Boggle {
         this.abjad = 'DGHIKLPSYEUTEORN';
         this.papan = [];
         this.kamus = ['APPLE', 'TURN', 'PUT', 'SIT', 'TRIP']
+        //this.kamus = kamus
         this.arrHasil = [];
     }
 
@@ -200,7 +201,7 @@ class Boggle {
             indexRowKamus++
             if (this.kamus.includes(hasil)) {
                 this.arrHasil.push([hasil])
-                console.log(hasil)
+                // console.log(hasil)
             }
 
         }
