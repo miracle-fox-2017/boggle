@@ -5,7 +5,7 @@ const newArr = fs.readFileSync('./data.js')
 class BoggleBoard{
   constructor(dictionary){
     this.dictionary = dictionary
-    this.dummyData  = ['data','array','nested','ball','basket']
+    this.dummyData  = ['data','nested']
     this.dummy      = []
     this.onBoard    = []
 
@@ -36,15 +36,19 @@ class BoggleBoard{
     let frontArr = []
     for(let i=0; i<this.dummyData.length; i++){
       frontArr.push(this.dummyData[i][0])
+      // for(let j=0; j<this.dummyData[i].length; j++){
+      //   frontArr.push(this.dummyData[i][j])
+      // }
     }
+
 
     console.log('huruf depan >>>>>',frontArr)
     for(let j=0; j<this.onBoard.length; j++){
       for(let k=0; k<frontArr.length; k++){
         console.log('found >>>>', this.onBoard[j].indexOf(frontArr[k]));
-        // if(this.onBoard[j].indexOf(frontArr[k]) !== -1){
-        //   return true
-        // }
+        if(this.onBoard[j].indexOf(frontArr[k]) !== -1){
+          return true
+        }
       }
     }
     // return false
@@ -79,9 +83,9 @@ let boggle = new BoggleBoard(newArr)
 
 
 // boggle.makeRandom()
-boggle.shake(4)
+// boggle.shake(4)
 
 
-// console.log(boggle.shake(4))
+console.log(boggle.shake(4))
 // console.log(boggle.solve(0,0))
-console.log(boggle.checkData())
+// console.log(boggle.checkData())
