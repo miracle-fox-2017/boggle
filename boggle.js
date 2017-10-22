@@ -7,12 +7,14 @@ class Boggle{
         this.saveWord = '';
         this.tempBoard = [];
         this.null = 0;
+        this.size = null;
     }
     alphabetRandom(){
         let alphabeth = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return alphabeth[Math.floor(Math.random()*26)];
     }
     shake(size){
+        this.size = size;
          for (let i = 0 ; i<size ; i++){
              let newArr=[]
              for (let j = 0 ; j<size ; j++){
@@ -87,7 +89,7 @@ class Boggle{
         }
             return false
       }
-      if(barisBoard === 0 && indexBoard === 1){
+      if(barisBoard-1 < 0 && indexBoard-1 >= 0 && indexBoard !== this.size-1){
         if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard][indexBoard+1] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++ 
@@ -115,35 +117,7 @@ class Boggle{
         }     
         return false;           
       }
-      if(barisBoard === 0 && indexBoard === 2){
-        if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++ 
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard+1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard+1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard-1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard-1,stopper+1)
-        }     
-        return false;           
-      }      
-      if(barisBoard === 0 && indexBoard === 3){
+      if(barisBoard === 0 && indexBoard === this.size-1){
         if( this.tempBoard[barisBoard+1][indexBoard] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard+1][indexBoard] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -161,7 +135,7 @@ class Boggle{
         }
         return false
       }
-      if(barisBoard === 1 && indexBoard === 0){
+      if(barisBoard-1 >=0 && indexBoard-1 < 0 && barisBoard !== this.size-1){
         if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard-1][indexBoard] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -188,36 +162,8 @@ class Boggle{
             return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard,stopper+1)
         }        
         return false
-      }
-      if(barisBoard === 2 && indexBoard === 0){
-        if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard,stopper+1)
-        }
-        if( this.tempBoard[barisBoard-1][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard+1] = this.null++ 
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard+1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard+1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard+1,stopper+1)
-        }        
-        if( this.tempBoard[barisBoard+1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard,stopper+1)
-        }        
-        return false
-      }      
-      if(barisBoard === 2 && indexBoard === 3){
+      }   
+      if(barisBoard-1 >=0 && indexBoard+1 > this.size-1 && barisBoard !== this.size-1){
         if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard-1][indexBoard] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -244,36 +190,8 @@ class Boggle{
             return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard+1,stopper+1)
         }        
         return false
-      } 
-      if(barisBoard === 2 && indexBoard === 3){
-        if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard,stopper+1)
-        }
-        if( this.tempBoard[barisBoard+1][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard+1][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard+1,indexBoard-1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard+1,stopper+1)
-        }        
-        if( this.tempBoard[barisBoard-1][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard-1,stopper+1)
-        }        
-        return false
-      }       
-      if(barisBoard === 3 && indexBoard === 0){
+      }  
+      if(barisBoard === this.size-1 && indexBoard === 0){
         if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard-1][indexBoard] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -291,7 +209,7 @@ class Boggle{
         }
         return false
       }
-      if(barisBoard === 3 && indexBoard === 1){
+      if(barisBoard+1 > this.size-1 && indexBoard-1 >=0 && indexBoard !== this.size-1){
         if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard][indexBoard+1] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -318,36 +236,8 @@ class Boggle{
             return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard+1,stopper+1)
         }                
         return false
-      }
-      if(barisBoard === 3 && indexBoard === 2){
-        if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard+1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard,indexBoard-1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard-1][indexBoard-1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard-1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard-1,stopper+1)
-        }
-        if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard,stopper+1)
-        }  
-        if( this.tempBoard[barisBoard-1][indexBoard+1] === this.kamus[indexKamus][num]){
-            this.tempBoard[barisBoard-1][indexBoard+1] = this.null++
-            this.tempBoard[barisBoard][indexBoard] = this.null++
-            return this.checkBoard(num+1,indexKamus,barisBoard-1,indexBoard+1,stopper+1)
-        }                
-        return false
-      }                     
-      if(barisBoard === 3 && indexBoard === 3){
+      }                 
+      if(barisBoard === this.size-1 && indexBoard === this.size-1){
         if( this.tempBoard[barisBoard-1][indexBoard] === this.kamus[indexKamus][num]){
             this.tempBoard[barisBoard-1][indexBoard] = this.null++
             this.tempBoard[barisBoard][indexBoard] = this.null++
@@ -365,8 +255,6 @@ class Boggle{
         }
         return false
       }
-      // if(barisBoard === 1 && indexBoard === 1 || barisBoard === 1 && indexBoard === 2 ||
-      //    barisBoard === 2 && indexBoard === 1 || barisBoard === 2 && indexBoard === 2){ 
       else{                        
             if( this.tempBoard[barisBoard][indexBoard+1] === this.kamus[indexKamus][num]){
                 this.tempBoard[barisBoard][indexBoard+1] = this.null++
@@ -424,5 +312,6 @@ class Boggle{
     }
 }
 var game = new Boggle()
+//flexibel shake you can insert parameter randomly not only 4
 game.shake(4);
 game.solve();
